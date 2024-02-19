@@ -1,0 +1,11 @@
+/Users/nylon/itmo/compmath/lab1/new/back/target/debug/deps/libtauri_macros-1c4a51284b86a3bb.dylib: /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/lib.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/mod.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/handler.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/wrapper.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command_module.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/runtime.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/context.rs
+
+/Users/nylon/itmo/compmath/lab1/new/back/target/debug/deps/tauri_macros-1c4a51284b86a3bb.d: /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/lib.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/mod.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/handler.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/wrapper.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command_module.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/runtime.rs /Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/context.rs
+
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/lib.rs:
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/mod.rs:
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/handler.rs:
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command/wrapper.rs:
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/command_module.rs:
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/runtime.rs:
+/Users/nylon/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-macros-1.4.3/src/context.rs:
