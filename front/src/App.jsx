@@ -125,6 +125,31 @@ function validate(A, b, n) {
     return true;
 }
 
+function generateRandomMatrix(n) {
+    let matrix = "";
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            matrix += Math.random() * (i !== j ? 10 : 30);
+            if (j < n - 1) {
+                matrix += " ";
+            }
+        }
+        matrix += "\n";
+    }
+    return matrix;
+}
+
+function generateRandomVector(n) {
+    let vector = "";
+    for (let i = 0; i < n; i++) {
+        vector += Math.random() * 10;
+        if (i < n - 1) {
+            vector += " ";
+        }
+    }
+    return vector;
+}
+
 function setRow(N, eps, x, L, it, errors) {
     console.log(N, eps, x, L, it, errors);
 
@@ -164,7 +189,7 @@ function setRow(N, eps, x, L, it, errors) {
 
 function App() {
     let [n, setN] = useState(0);
-    let [eps, setEps] = useState(1.0);
+    let [eps, setEps] = useState(1e9);
     let [mat, setMat] = useState("");
     let [res, setRes] = useState("");
     let [file, setFile] = useState(null);
@@ -176,15 +201,34 @@ function App() {
             <div className="choose">
                 <InputNumber name="choose-N" placeholder="choose N" min={0} max={N} onChange={(e) => setN(e.value)} /><br />
                 <InputNumber name="choose-eps" placeholder="choose precision" min={0} minFractionDigits={0} maxFractionDigits={5} onChange={(e) => setEps(e.value)} /><br />
-                <input name="choose-from-file" id="kekkekkek" placeholder="load from file" type="file" accept=".csv" onChange={(e) => {
+                <Button style={{ 'position': 'absolute', 'margin-top': '10px', 'margin-left': '-180px' }} onClick={() => {
+                    if (n == null || n === 0) {
+                        alert('choose N');
+                        return;
+                    }
+                    let mat = generateRandomMatrix(n);
+                    let res = generateRandomVector(n);
+                    document.getElementById("matinp").value = mat;
+                    document.getElementById("vecinp").value = res;
+                    setMat(mat);
+                    setRes(res);
+                }}>Generate Random</Button><input name="choose-from-file" id="kekkekkek" placeholder="load from file" type="file" accept=".csv" onChange={(e) => {
                     setFile(e.target.files[0]);
                 }} /><Button onClick={() => {
                     setFile(null);
                     document.getElementById("kekkekkek").value = null;
                 }} style={{ 'position': 'absolute', 'margin-top': '10px' }}>Clear</Button><br />
-                <InputTextarea name="choose-mat" placeholder="enter coefficients" onChange={(e) => setMat(e.target.value)}></InputTextarea><br />
-                <InputTextarea name="choose-res" placeholder="enter resulting vector" onChange={(e) => setRes(e.target.value)}></InputTextarea><br />
+                <InputTextarea id="matinp" name="choose-mat" keyfilter={/^[+\-.\d\s]*$/} placeholder="enter coefficients" onChange={(e) => setMat(e.target.value)}></InputTextarea><br />
+                <InputTextarea id="vecinp" name="choose-res" keyfilter={/^[+\-.\d\s]*$/} placeholder="enter resulting vector" onChange={(e) => setRes(e.target.value)}></InputTextarea><br />
                 <Button onClick={() => {
+                    if (n == null || n === 0) {
+                        alert('choose N');
+                        return;
+                    }
+                    if (eps == 1e9) {
+                        alert('choose precision');
+                        return;
+                    }
                     console.log(Run(n, eps, mat, res, file));
                 }}>Run</Button>
             </div>
