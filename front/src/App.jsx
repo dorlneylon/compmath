@@ -129,7 +129,7 @@ function generateRandomMatrix(n) {
     let matrix = "";
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
-            matrix += Math.random() * (i !== j ? 10 : 30);
+            matrix += Math.random() * (i !== j ? 10 : 40);
             if (j < n - 1) {
                 matrix += " ";
             }
@@ -199,8 +199,8 @@ function App() {
     return (
         <div className="container">
             <div className="choose">
-                <InputNumber name="choose-N" placeholder="choose N" min={0} max={N} onChange={(e) => setN(e.value)} /><br />
-                <InputNumber name="choose-eps" placeholder="choose precision" min={0} minFractionDigits={0} maxFractionDigits={5} onChange={(e) => setEps(e.value)} /><br />
+                <InputNumber id="choose-N" name="choose-N" placeholder="choose N" min={0} max={N} onChange={(e) => setN(e.value)} /><br />
+                <InputNumber id="choose-eps" name="choose-eps" placeholder="choose precision" min={0} minFractionDigits={0} maxFractionDigits={5} onChange={(e) => setEps(e.value)} /><br />
                 <Button style={{ 'position': 'absolute', 'margin-top': '10px', 'margin-left': '-180px' }} onClick={() => {
                     if (n == null || n === 0) {
                         alert('choose N');
@@ -230,7 +230,14 @@ function App() {
                         return;
                     }
                     console.log(Run(n, eps, mat, res, file));
-                }}>Run</Button>
+                }}>Run</Button><Button onClick={() => {
+                    setMat("");
+                    setRes("");
+                    setFile(null);
+                    document.getElementById("matinp").value = null;
+                    document.getElementById("vecinp").value = null;
+                    document.getElementById("kekkekkek").value = null;
+                }}>Clear input</Button>
             </div>
             <div className="journal">
                 <table id="j-table">

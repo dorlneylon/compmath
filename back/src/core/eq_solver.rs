@@ -57,13 +57,36 @@ fn permute(a: &mut Mat) -> Result<(), String> {
     Err("Matrix cannot be diagonally dominant".to_string())
 }
 
-pub fn gauss_seidel(a: &mut Mat, b: &Vec<f32>, eps: f32) -> Result<Response, String> {
-    let mut x = vec![0f32; a.rows];
-    let mut y = vec![1f32; a.rows];
+fn conditions(a: &mut Mat, b: &Vec<f32>, eps: f32) -> Result<(), String> {
+    let mut vc = a.data.clone();
+    vc.push(b.clone());
+    let ab = Mat::from(vc);
+
+    if a.rk() != ab.rk() {
+        return Err("Kronecker-Capelli's condition is not satisfied".to_string());
+    }
+
+    if a.det(eps) == 0f32 {
+        return Err("Matrix is singular".to_string());
+    }
 
     if let Err(msg) = permute(a) {
         return Err(msg);
     }
+
+    Ok(())
+}
+
+pub fn gauss_seidel(a: &mut Mat, b: &Vec<f32>, eps: f32) -> Result<Response, String> {
+    match conditions(a, b, eps) {
+        Ok(_) => process(a, b, eps),
+        Err(msg) => Err(msg),
+    }
+}
+
+fn process(a: &mut Mat, b: &Vec<f32>, eps: f32) -> Result<Response, String> {
+    let mut x = vec![0f32; a.rows];
+    let mut y = vec![1f32; a.rows];
 
     for k in 1..=M {
         x = y.clone();

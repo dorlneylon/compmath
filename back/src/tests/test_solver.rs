@@ -32,6 +32,10 @@ mod tests {
         assert_eq!(mat1 + mat2, Mat::from(vec![vec![2.0, 4.0], vec![6.0, 8.0]]));
 
         assert_eq!(Mat::from(vec![vec![1.0, 2.0], vec![3.0, 4.0]])[0][1], 2.0);
+
+        assert!((Mat::from(vec![vec![1.0, 2.0], vec![3.0, 4.0]]).det(1e-2)+2.0).abs() < 1e-2);
+        assert_eq!(Mat::from(vec![vec![1.0, 2.0], vec![3.0, 4.0]]).rk(), 2);
+        assert_eq!(Mat::from(vec![vec![1.0,1.0,0.0],vec![1.0,1.0,0.0], vec![0.0,0.0,1.0]]).rk(), 2);
     }
 
     #[test]

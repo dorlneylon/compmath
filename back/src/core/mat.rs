@@ -20,6 +20,85 @@ impl Mat {
     pub fn size(&self) -> usize {
         self.rows * self.cols
     }
+
+    pub fn det(&self, eps: f32) -> f32 {
+        assert_eq!(self.cols, self.rows);
+
+        let mut a = self.clone();
+        let mut ans = 1f32;
+
+        for i in 0..self.rows {
+            let mut k = i;
+
+            for j in i+1..self.rows {
+                if a[j][i].abs() > a[k][i].abs() {
+                    k = j;
+                }
+            }
+            if a[k][i].abs() < eps {
+                return 0f32;
+            }
+            let tmp = a[k].clone();
+            a[k] = a[i].clone();
+            a[i] = tmp;
+
+            if i != k {
+                ans = -ans;
+            }
+
+            ans *= a[i][i];
+
+            for j in i+1..self.rows {
+                a[i][j] /= a[i][i];
+            }
+            for j in 0..self.rows {
+                if j != i && a[j][i].abs() > eps {
+                    for k in i+1..self.rows {
+                        a[j][k] -= a[j][i] * a[i][k];
+                    }
+                }
+            }
+
+        }
+
+        ans
+    }
+
+    pub fn rk(&self) -> usize {
+        let mut ans = 0;
+        let mut a = self.clone();
+
+        for j in 0..self.cols {
+            let mut pivot = false;
+
+            for i in ans..self.rows {
+                if a[i][j] != 0.0 {
+                    let tmp = a[i].clone();
+                    a[i] = a[ans].clone();
+                    a[ans] = tmp;
+                    pivot = true;
+                    break;
+                }
+            }
+
+            if !pivot {
+                continue;
+            }
+            ans += 1;
+
+            for k in j..self.cols {
+                a[ans-1][k] /= a[ans-1][j];
+            }
+
+            for r in ans..self.rows {
+                for k in (j..self.cols).rev() {
+                    a[r][k] -= a[ans-1][k]*a[r][j];
+                }
+            }
+        }
+
+        ans
+    }
 }
 
 impl std::ops::Index<usize> for Mat {
@@ -35,6 +114,8 @@ impl std::ops::IndexMut<usize> for Mat {
         &mut self.data[index]
     }
 }
+
+use std::mem::swap;
 use std::ops::{Add, Mul};
 
 impl Add for Mat {
