@@ -92,13 +92,17 @@ fn process(a: &mut Mat, b: &Vec<f32>, eps: f32) -> Result<Response, String> {
         x = y.clone();
 
         for i in 0..a.rows {
-            let mut var = 0f32;
-            for j in 0..a.cols {
-                if i != j {
-                    var += a[i][j] * x[j];
-                }
+            let mut sum = b[i];
+
+            for j in 0..i {
+                sum -= a[i][j] * y[j];
             }
-            y[i] = (b[i] - var) / a[i][i];
+
+            for j in i+1..a.rows {
+                sum -= a[i][j] * x[j];
+            }
+
+            y[i] = sum / a[i][i];
         }
 
         if converges(&x, &y, eps) {

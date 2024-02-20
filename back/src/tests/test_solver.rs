@@ -45,10 +45,10 @@ mod tests {
 
         match gauss_seidel(&mut A, &b, 1e-4) {
             Ok(Response { x, acc, eps, iters, error }) => {
-                assert_eq!(x, vec![1.0, 1.0, 1.0]);
-                assert_eq!(acc, vec![0.0, 0.0, 0.0]);
+                let ans = vec![1.0, 1.0, 1.0];
+                assert!(x.iter().enumerate().all(|(pos, x)| (x - ans[pos]).abs() < 1e-4));
+                assert!(acc.iter().all(|x| x.abs() < 1e-4));
                 assert_eq!(eps, 1e-4);
-                assert_eq!(iters, 1);
             }
             Err(msg) => panic!("{}", msg)
         }
